@@ -36,3 +36,10 @@ Map<int, String> _genreMap = {
 
 List<String> genresToList(List<dynamic> genresIds) =>
 genresIds.map((id) => _genreMap[id]).toList();
+
+String getGenreValues(List<dynamic> genresIds){
+  StringBuffer buffer = StringBuffer();
+  buffer.writeAll(genresToList(genresIds),", ");
+
+  return buffer.toString();
+}
