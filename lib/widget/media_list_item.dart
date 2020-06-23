@@ -82,6 +82,14 @@ class MediaListItem extends StatelessWidget {
                           Container(width: 4.0,),
                           Icon(Icons.star,color: Colors.yellow,size: 16.0,)
                         ],
+                      ),
+                      Container(height: 4.0,),
+                      Row(
+                        children: <Widget>[
+                          Text(media.getreleaseYear().toString()),
+                          Container(width: 4.0,),
+                          Icon(Icons.date_range,color: Colors.blue,size: 16.0,)
+                        ],
                       )
                     ],
                   )
