@@ -43,6 +43,7 @@ class MediaListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
+                        width: 250.0,
                         child: Text(
                           media.title,
                           style: TextStyle(
@@ -50,9 +51,11 @@ class MediaListItem extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 15.0
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Container(
+                        width: 250.0,
                         padding: EdgeInsets.only(top: 4.0),
                         child: Text(
                           media.getGenres(),
@@ -68,6 +71,21 @@ class MediaListItem extends StatelessWidget {
                     ],
                   )
                 ),
+                Positioned(
+                  right: 10.0,
+                  bottom: 10.0,
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(media.voteAverage.toString()),
+                          Container(width: 4.0,),
+                          Icon(Icons.star,color: Colors.yellow,size: 16.0,)
+                        ],
+                      )
+                    ],
+                  )
+                )
               ],
             ),
           ),
