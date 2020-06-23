@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:movies_app/common/Constantes.dart';
+import 'package:movies_app/model/Media.dart';
 
 class HttpHandler{
 
@@ -13,7 +14,7 @@ class HttpHandler{
     return json.decode(response.body).toString();
   }
 
-  Future<String> fetchMovies(){
+  Future<List<Media>> fetchMovies(){
     var uri = Uri.http(_baseUrl, "/3/movie/popular",{
       'api_key': API_KEY,
       'language': _lang,
@@ -21,7 +22,7 @@ class HttpHandler{
     });
 
     return getJson(uri).then((data) => 
-      data.toString()
+      data['results'].map<Media>((item) => Media(item)).toList()
     );
   }
 
