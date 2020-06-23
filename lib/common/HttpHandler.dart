@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:movies_app/common/Constantes.dart';
 import 'package:movies_app/model/Media.dart';
 
+import 'MediaProvider.dart';
+
 class HttpHandler{
   
   static final _httpHandler = HttpHandler();
@@ -20,14 +22,26 @@ class HttpHandler{
   }
 
   Future<List<Media>> fetchMovies(){
-    var uri = Uri.http(_baseUrl, "/3/movie/popular",{
+    var uri = Uri.http(_baseUrl, "3/movie/popular",{
       'api_key': API_KEY,
       'language': _lang,
       'page' : "1"
     });
 
     return getJson(uri).then((data) => 
-      data['results'].map<Media>((item) => Media(item)).toList()
+      data['results'].map<Media>((item) => Media(item, MediaType.movie)).toList()
+    );
+  }
+
+  Future<List<Media>> fetchShow(){
+    var uri = Uri.http(_baseUrl, "3/tv/popular",{
+      'api_key': API_KEY,
+      'language': _lang,
+      'page' : "1"
+    });
+
+    return getJson(uri).then((data) => 
+      data['results'].map<Media>((item) => Media(item, MediaType.show)).toList()
     );
   }
 

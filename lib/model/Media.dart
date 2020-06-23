@@ -1,4 +1,5 @@
 import 'package:movies_app/common/util.dart';
+import 'package:movies_app/common/MediaProvider.dart';
 
 class Media{
   
@@ -21,22 +22,22 @@ class Media{
     return DateTime.parse(releaseDate).year;
   }
   
-  factory Media(Map jsonMap){
+  factory Media(Map jsonMap, MediaType mediaType){
     try {
-      return Media.deserialize(jsonMap);
+      return Media.deserialize(jsonMap, mediaType);
     } catch (e) {
         throw e;
     }
   }
 
-  Media.deserialize(Map json) :
+  Media.deserialize(Map json, MediaType mediaType) :
     id = json["id"].toInt(),
     voteAverage = json["vote_average"].toDouble(),
-    title = json["title"],
+    title = json[mediaType == MediaType.movie ? "title" : "name"],
     posterPath = json["poster_path"] ?? "",
     backdropPath = json["backdrop_path"] ?? "",
     overview = json["overview"],
-    releaseDate = json["release_date"],
+    releaseDate = json[mediaType == MediaType.movie ? "release_date" : "first_air_date"],
     genreIds = json["genre_ids"].toList();
 
 }

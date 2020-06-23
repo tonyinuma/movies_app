@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/common/HttpHandler.dart';
 import 'package:movies_app/model/Media.dart';
 import 'package:movies_app/widget/media_list_item.dart';
+import 'package:movies_app/common/MediaProvider.dart';
 
 class MediaList extends StatefulWidget {
+
+  final MediaProvider provider;
+
+  MediaList(this.provider);
+
   @override
   _MediaListState createState() => new _MediaListState();
  }
@@ -18,8 +24,18 @@ class _MediaListState extends State<MediaList> {
     loadMovies();
   }
 
+  @override
+  void didUpdateWidget(MediaList oldWidget) {
+    if (oldWidget.provider.runtimeType != widget.provider.runtimeType) {
+      _media = List();
+      loadMovies();
+    }
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+
   void loadMovies() async{
-    var movies = await HttpHandler().fetchMovies();
+    var movies = await widget.provider.fetchMedia();
     setState(() {
       _media.addAll(movies);
     });

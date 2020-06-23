@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:movies_app/common/HttpHandler.dart';
 import 'package:movies_app/model/Media.dart';
-import 'package:movies_app/common/MediaProvider.dart';
 
 abstract class MediaProvider {
   
@@ -20,7 +19,13 @@ class MovieProvider extends MediaProvider{
 }
 
 class ShowProvider extends MediaProvider{
+  HttpHandler _client = HttpHandler.get();
 
+  @override
+  Future<List<Media>> fetchMedia(){
+    return _client.fetchShow();
+  }
 }
 
 
+enum MediaType{movie, show}
