@@ -5,9 +5,14 @@ import 'package:movies_app/common/Constantes.dart';
 import 'package:movies_app/model/Media.dart';
 
 class HttpHandler{
-
+  
+  static final _httpHandler = HttpHandler();
   final String _baseUrl = "api.themoviedb.org";
   final String _lang = "es-ES";
+
+  static HttpHandler get(){
+    return _httpHandler;
+  }
   
   Future<dynamic> getJson(Uri uri)async{
     http.Response response = await http.get(uri);
