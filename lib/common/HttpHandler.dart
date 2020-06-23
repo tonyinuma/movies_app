@@ -11,7 +11,7 @@ class HttpHandler{
   
   Future<dynamic> getJson(Uri uri)async{
     http.Response response = await http.get(uri);
-    return json.decode(response.body).toString();
+    return json.decode(response.body);
   }
 
   Future<List<Media>> fetchMovies(){

@@ -1,3 +1,5 @@
+import 'package:movies_app/common/util.dart';
+
 class Media{
   
   int id;
@@ -8,9 +10,16 @@ class Media{
   String overview;
   String releaseDate;
   List<dynamic> genreIds;
+
+  String getPosterUrl() => getMediumPictureUrl(posterPath);
+  String getBackDropUrl() => getLargePictureUrl(backdropPath);
   
   factory Media(Map jsonMap){
-    return Media.deserialize(jsonMap);
+    try {
+      return Media.deserialize(jsonMap);
+    } catch (e) {
+        throw e;
+    }
   }
 
   Media.deserialize(Map json) :
@@ -22,6 +31,5 @@ class Media{
     overview = json["overview"],
     releaseDate = json["release_date"],
     genreIds = json["genre_ids"].toList();
-
 
 }

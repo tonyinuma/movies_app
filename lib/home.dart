@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/HttpHandler.dart';
+import 'package:movies_app/widget/media_list.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,19 +14,7 @@ class _HomeState extends State<Home> {
       BottomNavigationBarItem(icon: Icon(Icons.star), title: Text("Mejor Valoradas"))
     ];
   }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loadJson();
-  }
-
-  _loadJson()async{
-    String data = await HttpHandler().fetchMovies();
-    print(data);
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +48,11 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+      ),
+      body: PageView(
+        children: <Widget>[
+          MediaList()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: _getFooterItems(),
