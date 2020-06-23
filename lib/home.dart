@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/common/HttpHandler.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,6 +13,18 @@ class _HomeState extends State<Home> {
       BottomNavigationBarItem(icon: Icon(Icons.update), title: Text("Próximamente")),
       BottomNavigationBarItem(icon: Icon(Icons.star), title: Text("Mejor Valoradas"))
     ];
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadJson();
+  }
+
+  _loadJson()async{
+    String data = await HttpHandler().fetchMovies();
+    print(data);
   }
 
   @override
