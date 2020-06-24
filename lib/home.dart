@@ -30,9 +30,16 @@ class _HomeState extends State<Home> {
   MediaType mediaType = MediaType.movie;
 
   List<BottomNavigationBarItem> _getFooterItems(){
-    return [
+    
+    return mediaType == MediaType.movie ? 
+    [ 
       BottomNavigationBarItem(icon: Icon(Icons.thumb_up), title: Text("Populares")),
       BottomNavigationBarItem(icon: Icon(Icons.update), title: Text("Próximamente")),
+      BottomNavigationBarItem(icon: Icon(Icons.star), title: Text("Mejor Valoradas"))
+    ]:
+    [ 
+      BottomNavigationBarItem(icon: Icon(Icons.thumb_up), title: Text("Populares")),
+      BottomNavigationBarItem(icon: Icon(Icons.update), title: Text("En el Aire")),
       BottomNavigationBarItem(icon: Icon(Icons.star), title: Text("Mejor Valoradas"))
     ];
   }
