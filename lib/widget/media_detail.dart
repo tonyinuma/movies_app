@@ -22,6 +22,11 @@ class MediaDetail extends StatelessWidget {
             filter: ui.ImageFilter.blur(sigmaX: 5.0,sigmaY: 5.0),
             child: Container(
               color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.all(20.0),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -48,7 +53,7 @@ class MediaDetail extends StatelessWidget {
                   ),
                   SizedBox(height: 20.0),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                    margin: const EdgeInsets.symmetric(vertical: 5.0),
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -74,13 +79,22 @@ class MediaDetail extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        media.overview,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                          fontFamily: 'Arvo'
+                        )
+                      )
+                    ],
+                  )
                 ],
               ),
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.all(20.0),
             )
           )
         ],
