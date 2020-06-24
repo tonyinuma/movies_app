@@ -46,6 +46,34 @@ class MediaDetail extends StatelessWidget {
                       ]
                     ),
                   ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            media.title,
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.white, 
+                              fontSize: 30.0,
+                              fontFamily: 'Arvo'
+                            ),
+                          )
+                        ),
+                        Text(
+                          '${media.voteAverage.toString()}/10',
+                          style: TextStyle(
+                            color: Colors.yellowAccent,
+                            fontSize: 20.0,
+                            fontFamily: 'Arvo'
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
