@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/common/HttpHandler.dart';
 import 'package:movies_app/model/Media.dart';
 import 'package:movies_app/widget/media_list_item.dart';
 import 'package:movies_app/common/MediaProvider.dart';
@@ -7,8 +6,8 @@ import 'package:movies_app/common/MediaProvider.dart';
 class MediaList extends StatefulWidget {
 
   final MediaProvider provider;
-
-  MediaList(this.provider);
+  String category;
+  MediaList(this.provider,this.category);
 
   @override
   _MediaListState createState() => new _MediaListState();
@@ -35,7 +34,7 @@ class _MediaListState extends State<MediaList> {
   }
 
   void loadMovies() async{
-    var movies = await widget.provider.fetchMedia();
+    var movies = await widget.provider.fetchMedia(widget.category);
     setState(() {
       _media.addAll(movies);
     });

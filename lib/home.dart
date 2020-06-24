@@ -8,8 +8,24 @@ class Home extends StatefulWidget {
  }
 class _HomeState extends State<Home> {
 
+  @override
+  void initState() {
+    _pageController = PageController();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   final MediaProvider movieProvider = MovieProvider();
   final MediaProvider showProvider = ShowProvider();
+  PageController _pageController;
+  int _page = 0;
 
   MediaType mediaType = MediaType.movie;
 
@@ -66,10 +82,18 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: PageView(
-        children: _getMediaList()
+        children: _getMediaList(),
+        controller: _pageController,
+        onPageChanged: (int index){
+          setState(() {
+            _page = index;
+          });
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: _getFooterItems(),
+        onTap: _navigationTapped,
+        currentIndex: _page,
       ) 
     );
   }
@@ -85,9 +109,22 @@ class _HomeState extends State<Home> {
   List<Widget> _getMediaList(){
     return (mediaType == MediaType.movie) ? 
     <Widget>[
-      MediaList(movieProvider)
+      MediaList(movieProvider, "popular"),
+      MediaList(movieProvider, "upcoming"),
+      MediaList(movieProvider, "top_rated")
     ]:<Widget>[
-      MediaList(showProvider)
+      MediaList(showProvider, "popular"),
+      MediaList(showProvider, "on_the_air"),
+      MediaList(showProvider, "top_rated")
     ];
+  }
+
+  void _navigationTapped(int page){
+    _pageController
+      .animateToPage(
+        page, 
+        duration: const Duration(microseconds: 300), 
+        curve: Curves.ease
+      );
   }
 }

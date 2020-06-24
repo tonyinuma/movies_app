@@ -21,8 +21,8 @@ class HttpHandler{
     return json.decode(response.body);
   }
 
-  Future<List<Media>> fetchMovies(){
-    var uri = Uri.http(_baseUrl, "3/movie/popular",{
+  Future<List<Media>> fetchMovies({String category: "popular"})async{
+    var uri = Uri.http(_baseUrl, "3/movie/$category",{
       'api_key': API_KEY,
       'language': _lang,
       'page' : "1"
@@ -33,8 +33,8 @@ class HttpHandler{
     );
   }
 
-  Future<List<Media>> fetchShow(){
-    var uri = Uri.http(_baseUrl, "3/tv/popular",{
+  Future<List<Media>> fetchShow({String category : "popular"})async{
+    var uri = Uri.http(_baseUrl, "3/tv/$category",{
       'api_key': API_KEY,
       'language': _lang,
       'page' : "1"
