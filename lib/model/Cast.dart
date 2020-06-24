@@ -1,5 +1,4 @@
 import 'package:movies_app/common/MediaProvider.dart';
-import 'package:movies_app/common/util.dart';
 
 class Cast{
 

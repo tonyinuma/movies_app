@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:movies_app/common/Constantes.dart';
+import 'package:movies_app/model/Cast.dart';
 import 'package:movies_app/model/Media.dart';
 
 import 'MediaProvider.dart';
@@ -42,6 +43,30 @@ class HttpHandler{
 
     return getJson(uri).then((data) => 
       data['results'].map<Media>((item) => Media(item, MediaType.show)).toList()
+    );
+  }
+
+  Future<List<Media>> fetchCreditMovies(int mediaId)async{
+    var uri = Uri.http(_baseUrl, "3/movie/$mediaId/credits",{
+      'api_key': API_KEY,
+      'language': _lang,
+      'page' : "1"
+    });
+
+    return getJson(uri).then((data) => 
+      data['cast'].map<Cast>((item) => Cast(item, MediaType.movie)).toList()
+    );
+  }
+
+  Future<List<Media>> fetchCreditShows(int mediaId)async{
+    var uri = Uri.http(_baseUrl, "3/tv/$mediaId/credits",{
+      'api_key': API_KEY,
+      'language': _lang,
+      'page' : "1"
+    });
+
+    return getJson(uri).then((data) => 
+      data['cast'].map<Cast>((item) => Cast(item, MediaType.show)).toList()
     );
   }
 
