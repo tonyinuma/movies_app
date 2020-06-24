@@ -6,7 +6,7 @@ import 'package:movies_app/model/Media.dart';
 abstract class MediaProvider {
   
   Future<List<Media>> fetchMedia(String category);
-  Future<List<Media>> fetchCast(int mediaId);
+  Future<List<Cast>> fetchCast(int mediaId);
 
 }
 
@@ -20,7 +20,7 @@ class MovieProvider extends MediaProvider{
   }
 
   @override
-  Future<List<Media>> fetchCast(int mediaId) {
+  Future<List<Cast>> fetchCast(int mediaId) {
     return _client.fetchCreditMovies(mediaId);
   }
 }
@@ -34,7 +34,7 @@ class ShowProvider extends MediaProvider{
   }
 
   @override
-  Future<List<Media>> fetchCast(int mediaId) {
+  Future<List<Cast>> fetchCast(int mediaId) {
     return _client.fetchCreditShows(mediaId);
   }
 }

@@ -54,7 +54,7 @@ class _MediaListState extends State<MediaList> {
               Navigator.push(
                 context, 
                 MaterialPageRoute(builder: (context){
-                  return MediaDetail(_media[index]);
+                  return MediaDetail(_media[index],widget.provider);
                 })
               );
             }, 

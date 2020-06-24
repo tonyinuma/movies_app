@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/common/MediaProvider.dart';
 import 'package:movies_app/model/Media.dart';
 import 'dart:ui' as ui;
+
+import 'cast_scroller.dart';
 
 class MediaDetail extends StatelessWidget {
 
   final Media media;
+  final MediaProvider provider;
 
-  MediaDetail(this.media);
+  MediaDetail(this.media,this.provider);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +96,8 @@ class MediaDetail extends StatelessWidget {
                         )
                       )
                     ],
-                  )
+                  ),
+                  CastScroller(provider, media.id),
                 ],
               ),
             )
