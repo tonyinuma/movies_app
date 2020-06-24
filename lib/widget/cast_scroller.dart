@@ -31,10 +31,43 @@ class _CastScrollerState extends State<CastScroller> {
     });
   }
 
+  Widget _builderCasts(BuildContext ctx, int index){
+    var cast = _cast[index];
+    return Padding(
+      padding: const EdgeInsets.only(right: 16.0),
+      child: Column(
+        children: <Widget>[
+          CircleAvatar(
+            backgroundImage: NetworkImage(
+              cast.getCastUrl()
+            ),
+            radius: 50.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              cast.name
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      
+    return Column(
+      children: <Widget>[
+        SizedBox.fromSize(
+          size: const Size.fromHeight(180.0),
+          child: ListView.builder(
+            itemCount: _cast.length,
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.only(top: 12.0,left: 20.0),
+            itemBuilder: _builderCasts,
+          ),
+        )
+      ],
     );
   }
 }
